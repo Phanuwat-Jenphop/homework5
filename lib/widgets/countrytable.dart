@@ -71,6 +71,61 @@ class _CountryState extends State<Countrytable> {
                           ),
                       onTap: () {
                         print('You click ${country.name}');
+
+                         showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return Center(
+                              child: GestureDetector(
+                                onTap: () {
+                                  Navigator.pop(context);
+                                },
+                                child: Container(
+                                  width: 500,
+                                  height: 600,
+                                  // color: Color.fromARGB(255, 156, 159, 159),
+                                  decoration: BoxDecoration(
+                                    color: Color.fromARGB(255, 181, 241, 241),
+                                    border:
+                                    Border.all(width: 4.0, color: Color.fromARGB(255, 58, 147, 243)), // ขอบนอก=ความหนาขอบนอก
+                                    borderRadius: BorderRadius.circular(16.0),
+                                  ),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                    children: [
+                                      Text(country.name ?? '',
+                                        style: TextStyle(
+                                          fontSize: 35.0,
+                                          color: Color.fromARGB(170, 2, 80, 80)
+                                        ),
+                                      ),
+                                      SizedBox(),
+                                      Image.network(
+                                        country.flag ?? '',
+                                        errorBuilder:
+                                          (context, error, stackTrace) {
+                                        // if error, show icon error
+                                            return Icon(
+                                              Icons.error,
+                                              color: Color.fromARGB(255, 54, 136, 244),
+                                            );
+                                          },
+                                          fit: BoxFit.fitHeight,
+                                      ),
+                                      SizedBox(),
+                                      Text("population No: " +  country.population.toString() ?? '',
+                                         style: TextStyle(
+                                          fontSize: 25.0,
+                                          color: Color.fromARGB(255, 16, 108, 108)
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
+                        );
                       },
                     );
                   },
